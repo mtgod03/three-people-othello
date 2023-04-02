@@ -46,7 +46,7 @@ export const fireResultAlert = (
         </tr>
         <tr>
           <td class="text-left px-6">${playerNames.player2}</td>
-          <td class="text-right px-6">${gameStats.scores.player3}</td>
+          <td class="text-right px-6">${gameStats.scores.player2}</td>
         </tr>
         <tr>
           <td class="text-left px-6">${playerNames.player3}</td>
