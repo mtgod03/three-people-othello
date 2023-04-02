@@ -1,14 +1,12 @@
 import { io } from 'socket.io-client';
 import { EntryNamespaceSocket, GameNamespaceSocket } from '@/types/socket';
 
-const socketServerUrl = `${window.location.protocol}//${window.location.hostname}:3001`;
-
-export const entrySocket: EntryNamespaceSocket = io(`${socketServerUrl}/entry`, {
+export const entrySocket: EntryNamespaceSocket = io('/entry', {
   autoConnect: false,
   reconnectionAttempts: 5,
 });
 
-export const gameSocket: GameNamespaceSocket = io(`${socketServerUrl}/game`, {
+export const gameSocket: GameNamespaceSocket = io('/game', {
   autoConnect: false,
   reconnectionAttempts: 5,
 });

@@ -2,18 +2,23 @@ import { Server } from 'socket.io';
 import { EntryNamespace, GameNamespace } from '@/types/socket';
 import { Turn } from '@/constants/game';
 
-export default defineNitroPlugin(() => {
-  const io = new Server(3001, {
-    cors: {
-      origin: '*',
-    },
-  });
+declare global {
+  var io: Server
+}
+
+export default defineEventHandler((event) => {
+  if (globalThis.io) {
+    return;
+  }
+
+  // @ts-expect-error
+  const io = new Server(event.node.req.socket.server);
+  globalThis.io = io;
 
   const entryNamespace: EntryNamespace = io.of('/entry');
   const gameNamespace: GameNamespace = io.of('game');
 
   entryNamespace.on('connection', (socket) => {
-    console.log('connecteed');  // test
     socket.on('enter', (room, playerName) => {
       if (gameNamespace.adapter.rooms.has(room)) {
         socket.emit('existentRoom');
