@@ -12,6 +12,11 @@ export default defineNuxtConfig({
       });
     },
   ],
+  nitro: {
+    prerender: {
+      routes: ['/', '/online', '/online/game', '/offline', '/offline/game'],
+    },
+  },
   vite: {
     define: {
       'process.env.DEBUG': false,
